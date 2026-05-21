@@ -115,9 +115,9 @@ async function generateColorWithStyleVariable(color: { r: number; g: number; b: 
       if (variableName) {
         if (DEBUG_MODE) {
           console.log(`样式转换（通过样式名）: "${styleName}" -> "${variableName}"`);
-          console.log(`生成: var(${variableName}, ${colorString})`);
+          console.log(`生成: var(${variableName})`);
         }
-        return `var(${variableName}, ${colorString})`;
+        return `var(${variableName})`;
       } else if (DEBUG_MODE) {
         console.log(`样式名转换失败: "${styleName}"`);
       }
@@ -130,9 +130,9 @@ async function generateColorWithStyleVariable(color: { r: number; g: number; b: 
       if (variableName) {
         if (DEBUG_MODE) {
           console.log(`样式转换（通过样式ID）: "${styleId}" -> "${variableName}" (类型: ${styleType})`);
-          console.log(`生成备选变量: var(${variableName}, ${colorString})`);
+          console.log(`生成备选变量: var(${variableName})`);
         }
-        return `var(${variableName}, ${colorString})`;
+        return `var(${variableName})`;
       }
     }
 
@@ -160,9 +160,9 @@ async function generateGradientWithStyleVariable(gradientCss: string, styleId?: 
       if (variableName) {
         if (DEBUG_MODE) {
           console.log(`渐变样式转换（通过样式名）: "${styleName}" -> "${variableName}"`);
-          console.log(`生成渐变: var(${variableName}, ${gradientCss})`);
+          console.log(`生成渐变: var(${variableName})`);
         }
-        return `var(${variableName}, ${gradientCss})`;
+        return `var(${variableName})`;
       } else if (DEBUG_MODE) {
         console.log(`渐变样式名转换失败: "${styleName}"`);
       }
@@ -174,9 +174,9 @@ async function generateGradientWithStyleVariable(gradientCss: string, styleId?: 
       if (variableName) {
         if (DEBUG_MODE) {
           console.log(`渐变样式转换（通过样式ID）: "${styleId}" -> "${variableName}"`);
-          console.log(`生成备选渐变变量: var(${variableName}, ${gradientCss})`);
+          console.log(`生成备选渐变变量: var(${variableName})`);
         }
-        return `var(${variableName}, ${gradientCss})`;
+        return `var(${variableName})`;
       }
     }
 
@@ -206,9 +206,9 @@ async function generateTextPropertyWithStyleVariable(propertyName: string, fallb
         const variableName = `${baseVariableName}-${propertyName}`;
         if (DEBUG_MODE) {
           console.log(`文本属性样式转换（通过样式名）: "${styleName}" -> "${variableName}"`);
-          console.log(`生成: var(${variableName}, ${fallbackValue})`);
+          console.log(`生成: var(${variableName})`);
         }
-        return `var(${variableName}, ${fallbackValue})`;
+        return `var(${variableName})`;
       } else if (DEBUG_MODE) {
         console.log(`文本样式名转换失败: "${styleName}"`);
       }
@@ -221,9 +221,9 @@ async function generateTextPropertyWithStyleVariable(propertyName: string, fallb
         const variableName = `${baseVariableName}-${propertyName}`;
         if (DEBUG_MODE) {
           console.log(`文本属性样式转换（通过样式ID）: "${styleId}" -> "${variableName}"`);
-          console.log(`生成备选变量: var(${variableName}, ${fallbackValue})`);
+          console.log(`生成备选变量: var(${variableName})`);
         }
-        return `var(${variableName}, ${fallbackValue})`;
+        return `var(${variableName})`;
       }
     }
 
@@ -538,7 +538,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
     const widthRpx = pxToRpx(widthPx, conversionRate);
     const widthVar = await getBoundVariableName(node, 'width', enableVariables);
     const widthValue = widthVar
-      ? `var(${widthVar}, ${widthRpx}rpx)`
+      ? `var(${widthVar})`
       : `${widthRpx}rpx`;
     styles.push(`width: ${widthValue}`);
   }
@@ -548,7 +548,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
     const heightRpx = pxToRpx(heightPx, conversionRate);
     const heightVar = await getBoundVariableName(node, 'height', enableVariables);
     const heightValue = heightVar
-      ? `var(${heightVar}, ${heightRpx}rpx)`
+      ? `var(${heightVar})`
       : `${heightRpx}rpx`;
     styles.push(`height: ${heightValue}`);
   }
@@ -589,7 +589,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
       if (px === 0) return '0';
 
       if (varName) {
-        return `var(${varName}, ${rpx}rpx)`;
+        return `var(${varName})`;
       }
 
       return `${rpx}rpx`;
@@ -632,7 +632,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
       const paddingVar = await getBoundVariableName(node, 'padding', enableVariables);
 
       const paddingValue = paddingVar
-        ? `var(${paddingVar}, ${paddingRpx}rpx)`
+        ? `var(${paddingVar})`
         : `${paddingRpx}rpx`;
 
       styles.push(`padding: ${paddingValue}`);
@@ -660,7 +660,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
         if (px === 0) return '0';
 
         if (varName) {
-          return `var(${varName}, ${rpx}rpx)`;
+          return `var(${varName})`;
         }
 
         return `${rpx}rpx`;
@@ -764,7 +764,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
         const itemSpacingVar = await getBoundVariableName(node, 'itemSpacing', enableVariables);
 
         rowGapValue = itemSpacingVar
-          ? `var(${itemSpacingVar}, ${itemSpacingRpx}rpx)`
+          ? `var(${itemSpacingVar})`
           : `${itemSpacingRpx}rpx`;
       }
 
@@ -774,7 +774,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
         const counterAxisSpacingVar = await getBoundVariableName(node, 'counterAxisSpacing', enableVariables);
 
         columnGapValue = counterAxisSpacingVar
-          ? `var(${counterAxisSpacingVar}, ${counterAxisSpacingRpx}rpx)`
+          ? `var(${counterAxisSpacingVar})`
           : `${counterAxisSpacingRpx}rpx`;
       }
 
@@ -834,13 +834,13 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
 
       // 情况1: 存在统一圆角变量（cornerRadiusVar） - 优先使用
       if (cornerRadiusVar) {
-        styles.push(`border-radius: var(${cornerRadiusVar}, ${borderRadiusRpx}rpx)`);
+        styles.push(`border-radius: var(${cornerRadiusVar})`);
       }
       // 情况2: 四个角都绑定了变量（任意数量）
       else if (nonNullVars.length > 0) {
         // 数字类型圆角意味着四个角值相同，使用第一个变量作为统一圆角变量
         const firstVar = nonNullVars[0];
-        styles.push(`border-radius: var(${firstVar}, ${borderRadiusRpx}rpx)`);
+        styles.push(`border-radius: var(${firstVar})`);
       }
       // 情况3: 没有变量绑定
       else {
@@ -884,8 +884,8 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
 
         // 检查四个角的值是否完全相同
         const allValuesSame = topLeftPx === topRightPx &&
-                            topLeftPx === bottomRightPx &&
-                            topLeftPx === bottomLeftPx;
+          topLeftPx === bottomRightPx &&
+          topLeftPx === bottomLeftPx;
 
         if (DEBUG_MODE) {
           console.log('四个角值是否相同:', allValuesSame);
@@ -898,43 +898,43 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
 
         // 情况1: 存在统一圆角变量（cornerRadiusVar） - 优先使用
         if (cornerRadiusVar) {
-          styles.push(`border-radius: var(${cornerRadiusVar}, ${topLeftRpx}rpx)`);
+          styles.push(`border-radius: var(${cornerRadiusVar})`);
         }
         // 情况2: 四个角都绑定了变量（任意数量）
         else if (nonNullVars.length > 0) {
           // 如果四个角值相同，使用第一个变量作为统一圆角变量
           if (allValuesSame) {
             const firstVar = nonNullVars[0];
-            styles.push(`border-radius: var(${firstVar}, ${topLeftRpx}rpx)`);
+            styles.push(`border-radius: var(${firstVar})`);
           }
           // 如果四个角都绑定了同一个变量（全部绑定且变量相同）
           else if (nonNullVars.length === 4 && uniqueVars.length === 1) {
             const commonVar = uniqueVars[0];
-            styles.push(`border-radius: var(${commonVar}, ${topLeftRpx}rpx) var(${commonVar}, ${topRightRpx}rpx) var(${commonVar}, ${bottomRightRpx}rpx) var(${commonVar}, ${bottomLeftRpx}rpx)`);
+            styles.push(`border-radius: var(${commonVar}) var(${commonVar}) var(${commonVar}) var(${commonVar})`);
           }
           // 情况3: 部分角绑定了变量，或变量不同
           else {
             // 分别生成单独属性
             if (topLeftRadiusVar) {
-              styles.push(`border-top-left-radius: var(${topLeftRadiusVar}, ${topLeftRpx}rpx)`);
+              styles.push(`border-top-left-radius: var(${topLeftRadiusVar})`);
             } else if (topLeftPx !== 0) {
               styles.push(`border-top-left-radius: ${topLeftRpx}rpx`);
             }
 
             if (topRightRadiusVar) {
-              styles.push(`border-top-right-radius: var(${topRightRadiusVar}, ${topRightRpx}rpx)`);
+              styles.push(`border-top-right-radius: var(${topRightRadiusVar})`);
             } else if (topRightPx !== 0) {
               styles.push(`border-top-right-radius: ${topRightRpx}rpx`);
             }
 
             if (bottomRightRadiusVar) {
-              styles.push(`border-bottom-right-radius: var(${bottomRightRadiusVar}, ${bottomRightRpx}rpx)`);
+              styles.push(`border-bottom-right-radius: var(${bottomRightRadiusVar})`);
             } else if (bottomRightPx !== 0) {
               styles.push(`border-bottom-right-radius: ${bottomRightRpx}rpx`);
             }
 
             if (bottomLeftRadiusVar) {
-              styles.push(`border-bottom-left-radius: var(${bottomLeftRadiusVar}, ${bottomLeftRpx}rpx)`);
+              styles.push(`border-bottom-left-radius: var(${bottomLeftRadiusVar})`);
             } else if (bottomLeftPx !== 0) {
               styles.push(`border-bottom-left-radius: ${bottomLeftRpx}rpx`);
             }
@@ -1060,7 +1060,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
     const borderWidthRpx = pxToRpx(strokeWeight, conversionRate);
     const borderWidthVar = await getBoundVariableName(node, 'strokeWeight', enableVariables);
     const borderWidthValue = borderWidthVar
-      ? `var(${borderWidthVar}, ${borderWidthRpx}rpx)`
+      ? `var(${borderWidthVar})`
       : `${borderWidthRpx}rpx`;
     styles.push(`border-width: ${borderWidthValue}`);
     styles.push(`border-style: solid`);
@@ -1105,7 +1105,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
         // 首先检查直接变量绑定
         const fontSizeVar = await getBoundVariableName(node, 'fontSize', enableVariables);
         if (fontSizeVar) {
-          value = `var(${fontSizeVar}, ${fallbackValue})`;
+          value = `var(${fontSizeVar})`;
         } else if (textStyleId) {
           // 如果没有直接变量绑定，但存在文本样式ID，使用文本样式变量
           value = await generateTextPropertyWithStyleVariable('font-size', fallbackValue, textStyleId);
@@ -1126,7 +1126,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
         // 首先检查直接变量绑定
         const fontWeightVar = await getBoundVariableName(node, 'fontWeight', enableVariables);
         if (fontWeightVar) {
-          value = `var(${fontWeightVar}, ${fallbackValue})`;
+          value = `var(${fontWeightVar})`;
         } else if (textStyleId) {
           // 如果没有直接变量绑定，但存在文本样式ID，使用文本样式变量
           value = await generateTextPropertyWithStyleVariable('font-weight', fallbackValue, textStyleId);
@@ -1153,7 +1153,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
         // 首先检查直接变量绑定
         const fontFamilyVar = await getBoundVariableName(node, 'fontFamily', enableVariables);
         if (fontFamilyVar) {
-          value = `var(${fontFamilyVar}, ${fallbackValue})`;
+          value = `var(${fontFamilyVar})`;
         } else if (textStyleId) {
           // 如果没有直接变量绑定，但存在文本样式ID，使用文本样式变量
           value = await generateTextPropertyWithStyleVariable('font-family', fallbackValue, textStyleId);
@@ -1183,7 +1183,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
           // 首先检查直接变量绑定
           const lineHeightVar = await getBoundVariableName(node, 'lineHeight', enableVariables);
           if (lineHeightVar) {
-            value = `var(${lineHeightVar}, ${fallbackValue})`;
+            value = `var(${lineHeightVar})`;
           } else if (textStyleId) {
             // 如果没有直接变量绑定，但存在文本样式ID，使用文本样式变量
             value = await generateTextPropertyWithStyleVariable('line-height', fallbackValue, textStyleId);
@@ -1214,7 +1214,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
           // 检查直接变量绑定
           const letterSpacingVar = await getBoundVariableName(node, 'letterSpacing', enableVariables);
           if (letterSpacingVar) {
-            value = `var(${letterSpacingVar}, ${fallbackValue})`;
+            value = `var(${letterSpacingVar})`;
           } else if (textStyleId) {
             // 如果没有直接变量绑定，但存在文本样式ID，使用文本样式变量
             value = await generateTextPropertyWithStyleVariable('letter-spacing', fallbackValue, textStyleId);
@@ -1264,7 +1264,7 @@ async function generateWechatMiniProgramCode(node: SceneNode, conversionRate: nu
     const opacityValue = node.opacity;
     const opacityVar = await getBoundVariableName(node, 'opacity', enableVariables);
     const opacityStyle = opacityVar
-      ? `var(${opacityVar}, ${opacityValue})`
+      ? `var(${opacityVar})`
       : `${opacityValue}`;
     styles.push(`opacity: ${opacityStyle}`);
   }
@@ -1372,21 +1372,48 @@ let currentConversionRate = DEFAULT_CONVERSION_RATE;
 // 是否启用变量（包括文本变量、间距变量、圆角变量等，默认关闭）
 let enableVariables = false;
 
+// 设置是否已从存储加载完成
+let settingsLoaded = false;
+
+// 加载设置的 Promise 引用，用于防止并发加载
+let loadSettingsPromise: Promise<void> | null = null;
+
 // 加载保存的设置
 async function loadSettings() {
-  try {
-    const savedRate = await figma.clientStorage.getAsync('conversionRate');
-    if (savedRate !== undefined) {
-      currentConversionRate = savedRate;
-    }
-
-    const savedEnableVariables = await figma.clientStorage.getAsync('enableVariables');
-    if (savedEnableVariables !== undefined) {
-      enableVariables = savedEnableVariables;
-    }
-  } catch (error) {
-    console.error('加载设置失败:', error);
+  // 如果设置已经加载完成，直接返回
+  if (settingsLoaded) {
+    return;
   }
+
+  // 如果已经有正在进行的加载操作，等待它完成
+  if (loadSettingsPromise) {
+    await loadSettingsPromise;
+    return;
+  }
+
+  // 创建新的加载操作
+  loadSettingsPromise = (async () => {
+    try {
+      const savedRate = await figma.clientStorage.getAsync('conversionRate');
+      if (savedRate !== undefined) {
+        currentConversionRate = savedRate;
+      }
+
+      const savedEnableVariables = await figma.clientStorage.getAsync('enableVariables');
+      if (savedEnableVariables !== undefined) {
+        enableVariables = savedEnableVariables;
+      }
+
+      // 标记设置已加载完成
+      settingsLoaded = true;
+    } catch (error) {
+      console.error('加载设置失败:', error);
+    } finally {
+      loadSettingsPromise = null;
+    }
+  })();
+
+  await loadSettingsPromise;
 }
 
 // 保存设置
@@ -1396,6 +1423,8 @@ async function saveSettings(rate: number, enableVariablesSetting: boolean) {
     await figma.clientStorage.setAsync('enableVariables', enableVariablesSetting);
     currentConversionRate = rate;
     enableVariables = enableVariablesSetting;
+    // 标记设置已加载完成（内存值是最新的）
+    settingsLoaded = true;
     return true;
   } catch (error) {
     console.error('保存设置失败:', error);
@@ -1445,7 +1474,10 @@ figma.on('run', ({ command }) => {
 figma.codegen.on('generate', async (event) => {
   const node = event.node;
 
-  // 使用当前转换倍率和变量设置
+  // 确保设置已加载完成（防止第一次生成时设置未加载）
+  await loadSettings();
+
+  // 使用当前转换倍率和变量设置（内存中的最新值）
   const code = await generateWechatMiniProgramCode(node, currentConversionRate, enableVariables);
 
   return [
